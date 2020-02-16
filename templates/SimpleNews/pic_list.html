@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 图片广场 -  {% endblock %}
+{% block page_header %} 图片广场  {% endblock %}
+
+{% block content %}
+    <h3>
+        {% if request.session.username %}
+            <form enctype="multipart/form-data" action="{% url "pic_upload" %}" method="POST">
+                {% csrf_token %}
+                <!--<input type="text" placeholder="名字" name="name" /><br><br>-->
+                <input type="file" placeholder="图片" name="picture" />
+                <button type="submit" value="Login"><i class="cloud upload icon"></i></button>
+            </form>
+
+        {% endif %}
+    </h3>
+
+    <div class="ui three stackable cards">
+
+        {% for pic in pics %}
+            <li><a href="{% url 'pic' pic.id %}">
+                <img src="{% url 'pic' pic.id %}">
+            </a></li>
+        {% endfor %}
+    </div>
+
+    <style>
+        li {
+            list-style: none;
+            float: left;
+            width: 33.3%; /*三列图片排列*/
+            padding: 2px;
+        }
+
+        li img {
+            width: 100%;
+        }
+    </style>
+{% endblock %}

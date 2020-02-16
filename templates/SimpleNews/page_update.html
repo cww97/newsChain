@@ -1,0 +1,10 @@
+{% extends 'SimpleNews/page_fork.html' %}
+
+{% block title %} Update - {% endblock %}
+
+{% block page_header %} Update {% endblock %}
+
+{% block form_action %}action="{% url 'draft_update' page.id %}"{% endblock %}
+
+{% block form_title %}value="{{ page.title }}"{% endblock %}
+

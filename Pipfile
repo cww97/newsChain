@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-filter = "*"
+markdown = "*"
+pygments = "*"
+mongoengine = "*"
+djangorestframework = "*"
+django-rest-framework-mongoengine = "*"
+django-mongoengine-forms = "*"
+django-mongo-auth = "*"
+django-mongo-sessions = "*"
+django-markdownx = "*"
+django-simplemde = "*"
+"bs4" = "*"
+markupsafe = "*"
+pypandoc = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"

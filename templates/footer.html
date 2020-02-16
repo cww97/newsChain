@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">Services</h4>
+                <div class="ui inverted link list">
+                    <a href="{% url 'news_list' %}" class="item">Homepage</a>
+                    <a href="{% url 'pic_list' %}" class="item">Photos</a>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header">Open Source</h4>
+                <div class="ui inverted link list">
+                    <a href="https://github.com/hkbudb" class="item">Github - HKBU DB</a>
+                    <a href="http://www.comp.hkbu.edu.hk/~db/" class="item">Homepage - HKBU DB</a>
+
+                </div>
+            </div>
+
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Credits</h4>
+                <p>Created by <a href="https://github.com/cww97">@cww97</a> .<br>
+                    Contact us via <a href="mailto:10152510217@stu.ecnu.edu.cn"> xxx@an.email.here </a></p>
+            </div>
+        </div>
+    </div>
+</div>

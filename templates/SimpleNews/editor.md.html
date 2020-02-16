@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/static/editor.md/css/editormd.css"/>
+<script src="/static/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/static/editor.md/editormd.js"></script>
+<script src="/static/node_modules/semantic-ui-less/semantic.js"></script>
+
+<div class="ui search item page-search" style="float: right; padding-right: 25%">
+    <div class="ui transparent icon input">
+        <input class="prompt" type="text" placeholder="Cite animals..." autocomplete="off">
+        <i class="search link icon"></i>
+    </div>
+    <div class="results"></div>
+</div>
+
+<div id="editormd" name="content">
+    <textarea class="editormd-markdown-textarea" name="content"
+              id="id_editor">{{ editor_content|default:'' }}</textarea>
+</div>
+
+<script src="/static/editor.md/plugins/cite-dialog/cite-dialog.js"></script>
+<script type="text/javascript">
+    var postEditor;
+
+    $(function () {
+        postEditor = editormd("editormd", {
+            markdown: "",
+            path: '/static/editor.md/lib/',
+            placeholder: "Markdown is supported, enjoy...",
+            toolbarIcons: function () {
+                return ["bold", "del", "italic", "quote", "|", "h2", "h3", "list-ul", "list-ol", "hr", "|",
+                    "_link", "code", "image", "|", "help",
+                    "||", "watch", "fullscreen", "preview"]
+            },
+
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "{% url 'editor_upload' %}",
+
+            toolbarIconsClass: {
+                _link: "fa-chain",  // 指定一个FontAawsome的图标类
+            },
+            toolbarHandlers: {
+                _link: function () {// fuck this method
+                    var cm = this.cm;
+                    var cursor = cm.getCursor();
+                    var selection = cm.getSelection();
+                    cm.replaceSelection("[" + selection + "]()");
+                    if (selection === "") {
+                        cm.setCursor(cursor.line, cursor.ch + 4);
+                    }
+                }
+            },
+            lang: {
+                toolbar: {
+                    _link: "插入链接",
+                }
+            },
+        })
+        ;
+    });
+
+    $('.ui.search.page-search').search({
+        type: 'category',
+        apiSettings: {
+            url: '/api/search/page/?kw={query}'
+        },
+        minCharacters: 1,
+        onSelect: function (event) {
+            postEditor.citeDialog(event);
+        }
+    });
+</script>

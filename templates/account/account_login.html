@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} Login - {% endblock %}
+
+{% block page_header %} Login to your account {% endblock %}
+
+{% block content %}
+
+    <form class="ui form " action="{% url 'account_login'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="ui error message">
+            <div class="header">Should check something!</div>
+            <ul class="list"></ul>
+        </div>
+
+        <div class="field ">
+            <label for="id_username">Username:</label>
+            <input autofocus="" id="id_username" maxlength="254" name="username" placeholder="" required=""
+                   type="text"/>
+        </div>
+
+        <!--
+        <div class="field ">
+            <label for="id_password">Password:</label>
+            <input id="id_password" name="password" placeholder="" required="" type="password"/>
+        </div>
+
+        <div class="field ">
+            <label for="id_captcha_1">Captcha:</label>
+            <div class="inline">
+                <input class="form-control" style="width: 100px;" autocapitalize="off" autocomplete="off"
+                       autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text"/>
+                <input id="id_captcha_0" name="captcha_0" type="hidden"
+                       value="fbf3dff34af2282f8010c553e863e537d6ac2cc0"/>
+
+                <div style="display:inline-block; padding-left: 3px;" data-tooltip="You should calculate this!">
+
+                    <img src="/captcha/image/fbf3dff34af2282f8010c553e863e537d6ac2cc0/" style="cursor:pointer;" href="#"
+                         alt="captcha" class="captcha captcha-refresh" height="34px"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="field ">
+
+            <div class="ui checkbox">
+                <input class="hidden" id="id_remember_me" name="remember_me" placeholder="" type="checkbox"/>
+                <label>Remember me</label>
+            </div>
+
+        </div>-->
+
+        <button type="submit" class="ui positive button">Submit</button>
+    </form>
+{% endblock %}

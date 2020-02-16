@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ object.title }} - {% endblock %}
+
+{% block page_header %} {{ object.title }} {% endblock %}
+
+{% block content %}
+    <p>
+        Created by <a href="{% url 'account_pages' object.author.id %}">{{ object.author.username }}</a>
+        at {{ object.timeStamp }}
+        {% if not object.is_final and request.session.user_id == page_author_id %}
+            <a href="{% url 'draft_update' object.id %}"><i class="ui icon edit"></i></a>
+            <a href="{% url 'news_delete' object.id %}"> <i class="trash icon"></i> </a>
+        {% endif %}
+    </p>
+
+    <p><strong>Tags: </strong>
+        {% for tag in object.tags %}
+            <a href="{% url 'tag_page_list' tag %}">
+                {{ tag }}
+            </a>
+        {% endfor %}
+    </p>
+
+    <div id="id_content">
+        {{ object.content | safe }}
+    </div>
+
+    {% if object.ref_list %}
+        <h2 class="ui header"> Reference List: </h2>
+        <div class="ui list">
+            {% for ref in object.ref_list %}
+                <div class="item">
+                    <i class="map marker icon"></i>
+                    <div class="content">
+                        <a href="{% url 'news_detail' ref.page %}">
+                            {% if ref.vote  > 0 %}
+                                <font color="saddlebrown">{{ ref.name }}</font>
+                            {% elif ref.vote < 0 %}
+                                <font color="red">{{ ref.name }}</font>
+                            {% else %}
+                                <font>{{ ref.name }}</font>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if object.is_final %}
+        {% if '发起话题' in object.tags %}
+            <a href="{% url 'tag_contribute' object.title %}">
+                <button class="positive ui button" style="float: right">Contribute</button>
+            </a>
+        {% else %}
+            <a href="{% url 'news_fork' object.id %}">
+                <div class="ui basic blue button" tabindex="0" style="float: right"><i class="fork icon"></i> Derive
+                </div>
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <style>
+        img {
+            width: 100%;
+        }
+
+        a[vote="1"] {
+            color: saddlebrown;
+        }
+
+        a[vote="-1"] {
+            color: red;
+        }
+    </style>
+{% endblock %}

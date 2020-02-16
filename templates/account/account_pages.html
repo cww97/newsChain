@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} My Pages - {% endblock %}
+
+{% block page_header %} {{ account.username }} {% endblock %}
+
+{% block content %}
+
+
+    <div class="ui relaxed divided list">
+        {% for page in pages %}
+            {% if page.is_final or request.session.username == account.username%}
+            <div class="item">
+                <i class="file alternate outline icon"></i>
+                <div class="content">
+                    <a class="header" href="{% url 'news_detail' page.id %}">{{ page.title }}</a>
+                    <div class="description">
+                        Created at {{ page.timeStamp }}
+                        {% if not page.is_final %}
+                            <a href="{% url 'draft_update' page.id %}" class="ui tag label">Edit</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

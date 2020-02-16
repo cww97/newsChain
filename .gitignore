@@ -1,0 +1,4 @@
+.idea
+venv
+static/node_modules
+*.pyc

@@ -1,0 +1,16 @@
+{% if request.session.username %}
+    <div class="ui dropdown simple item">
+        <div class="text"> {{ request.session.username }}</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" href="{% url 'account_detail' request.session.user_id %}"> Profile </a>
+            <a class="item" href="{% url 'account_settings' request.session.user_id%}"> Settings </a>
+            <a class="item" href="{% url 'account_pages' request.session.user_id%}"> Pages </a>
+            <a class="item" href="{% url 'account_logout'%}"> Logout </a>
+        </div>
+    </div>
+{% else %}
+    <a href="{% url 'account_login' %}">
+        <button class="ui primary basic button"> Login</button>
+    </a>
+{% endif %}

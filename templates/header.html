@@ -1,0 +1,27 @@
+{% load static %}
+<div id="MathJax_Message" style="display: none;"></div>
+
+<div class="ui top fixed menu" id="navbar">
+
+    <div class="ui container" id="navbar-large">
+
+        <a class="{% if request.path == '/' %} active {% endif %} item" href="{% url 'news_list' %}">Home</a>
+    <a class="{% if request.path == '/tags/' %} active {% endif %} item" href="{% url 'tag_list' %}">Tags</a>
+        <a class="{% if request.path == '/create/' %} active {% endif %}item" href="{% url 'news_create' %}">Post</a>
+    <a class="{% if request.path == '/new_topic/' %} active {% endif %}item" href="{% url 'new_topic' %}">New Topic</a>
+
+        <div class="right menu">
+
+            <div class="ui category search item massive-search">
+                <div class="ui transparent icon input">
+                    <input class="prompt" type="text" placeholder="Search animals..." autocomplete="off">
+                    <i class="search link icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+
+            {% include 'account/account_header.html' %}
+
+        </div>
+    </div>
+</div>
